@@ -30,6 +30,8 @@ namespace BillingAPI.Controllers
                 return BadRequest(new { message = $"Failed to create the order {order.OrderId}, order is invalid" });
             }
 
+            _orderLogic.CreateOrder(order);
+
             return Ok(new { message = $"Order with ID {order.OrderId} is created." });
         }
 

@@ -46,23 +46,54 @@ namespace BillingAPI.Tests.Controllers
         }
 
         [Fact]
-        public void ProcessPayment_OrderExists_ReturnsOkRequest()
+        public void ProcessPayment_OrderExistsPaymentFails_ReturnsBadRequest()
         {
             // Arrange
             var order = new Order
             {
                 OrderId = 1,
+                PayableAmount = 12.32m,
                 PaymentGateway = "Swed",
             };
 
-            _mockOrderLogic.Setup(x => x.GetOrder(order.OrderId));
+            _mockOrderLogic.Setup(x => x.GetOrder(order.OrderId)).Returns(order);
+            _mockBillingLogic.Setup(x => x.ProcessPayment(order)).Returns(false);
 
             // Act
             var result = _billingController.ProcessPayment(order);
 
             // Assert
             result.Should().BeOfType<BadRequestObjectResult>()
-                .Which.Value.Should().BeEquivalentTo(new { message = $"Can't process payment, order does not exists" });
+                .Which.Value.Should().BeEquivalentTo(new { message = "Failed payment" });
+        }
+
+        [Fact]
+        public void ProcessPayment_OrderExists_ReturnsOkRequestWithReceipt()
+        {
+            // Arrange
+            var order = new Order
+            {
+                OrderId = 1,
+                PayableAmount = 12.32m,
+                PaymentGateway = "Swed",
+            };
+
+            var receipt = new Receipt
+            {
+                ReceiptId = 9912,
+                PaidAmmount = order.PayableAmount,
+            };
+
+            _mockOrderLogic.Setup(x => x.GetOrder(order.OrderId)).Returns(order);
+            _mockBillingLogic.Setup(x => x.ProcessPayment(order)).Returns(true);
+            _mockBillingLogic.Setup(x => x.CreateReceipt(order)).Returns(receipt);
+
+            // Act
+            var result = _billingController.ProcessPayment(order);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>()
+                .Which.Value.Should().BeEquivalentTo(receipt);
         }
     }
 }

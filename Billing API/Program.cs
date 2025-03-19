@@ -1,6 +1,5 @@
 using BillingAPI.Interfaces;
 using BillingAPI.Logic;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

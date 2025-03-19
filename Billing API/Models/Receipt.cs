@@ -21,6 +21,11 @@
         public string? TransactionId { get; set; }
 
         /// <summary>
+        /// Total ammout of money that user paid.
+        /// </summary>
+        public decimal PaidAmmount { get; set; }
+
+        /// <summary>
         /// Indicates if reciept is paid or not.
         /// </summary>
         public bool IsPaid { get; set; }

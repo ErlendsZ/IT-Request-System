@@ -30,6 +30,7 @@ namespace BillingAPI.Logic
                 ReceiptId = new Random().Next(1, 101),
                 OrderId = order.OrderId,
                 TransactionId = new Random().Next(1, 101).ToString() + "XYC-INTERNATIONAL",
+                PaidAmmount = order.PayableAmount,
                 IsPaid = true,
                 PaymentDate = DateTimeOffset.Now
             };

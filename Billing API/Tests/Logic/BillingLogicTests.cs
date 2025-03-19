@@ -41,6 +41,7 @@ namespace BillingAPI.Tests.Logic
             {
                 OrderId = 123456,
                 PaymentGateway = "ApplePay",
+                PayableAmount = 111.11m,
             };
 
             // Act
@@ -50,6 +51,7 @@ namespace BillingAPI.Tests.Logic
             result.Should().NotBeNull();
             result.ReceiptId.Should().NotBe(null);
             result.OrderId.Should().Be(order.OrderId);
+            result.PaidAmmount.Should().Be(order.PayableAmount);
             result.TransactionId.Should().NotBe(null);
             result.IsPaid.Should().BeTrue();
             result.PaymentDate.Should().BeCloseTo(DateTimeOffset.Now, TimeSpan.FromSeconds(5));

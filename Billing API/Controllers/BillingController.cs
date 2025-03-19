@@ -27,15 +27,16 @@ namespace BillingAPI.Controllers
         [HttpPost("processPayment")]
         public IActionResult ProcessPayment([FromBody] Order order)
         {
+            var createdOrder = _orderLogic.GetOrder(order.OrderId);
 
-            if (_orderLogic.GetOrder(order.OrderId) == null)
+            if (createdOrder == null)
             {
                 return BadRequest(new { message = "Can't process payment, order does not exists" });
             }
 
             if (_billingLogic.ProcessPayment(order))
             {
-                var receipt = _billingLogic.CreateReceipt(order);
+                var receipt = _billingLogic.CreateReceipt(createdOrder);
                 return Ok(receipt);
             }
             else
