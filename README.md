@@ -61,10 +61,11 @@ When POST is executed, you could try to GET it through **/api/ITSupport** by id 
 Then GET **/api/AiAnalysis/AiSupportReport** enter only required fields this should return something like this
 ![image](https://github.com/user-attachments/assets/5566a854-4a3a-4d30-a9a6-a56f2544d634)
 
-Possible improvments in future
-
+**Possible improvments in future**
 Put AI promt in seperate file
 Use larger model ( could not do that locally since computer limitations)
 Mask **AiAnalysis** fields that are not required for data getting.
-
+Alhrough the string http://localhost:11434 for accessing a local Ollama server — does not contain sensitive data, it should better be masked in future. Same for llama3.2:1b
+Add unit tests.
+Move data to db rather than use list
 
