@@ -4,7 +4,9 @@ How to test ?
 2. localhost should match since by default it uses 11434 AiAnalysisLogic.cs/CreateAiResponseAsync
 ![image](https://github.com/user-attachments/assets/36da39ac-9353-4bea-83b5-f8fb02149d98)
 
-Run debug through ISS Express.
+**Run debug through ISS Express.**
+![image](https://github.com/user-attachments/assets/bd309f2b-1812-45a4-a529-2f0e08f0de4e)
+
 
 ![image](https://github.com/user-attachments/assets/c394ae46-6ca4-447e-bfe1-4c6af0327f0d)
 
