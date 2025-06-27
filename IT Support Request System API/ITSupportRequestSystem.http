@@ -1,0 +1,6 @@
+@ITSupportRequestSystem = http://localhost:5250
+
+GET {{ITSupportRequestSystem}}/weatherforecast/
+Accept: application/json
+
+###
